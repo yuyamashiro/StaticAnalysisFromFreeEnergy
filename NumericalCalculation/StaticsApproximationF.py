@@ -44,6 +44,16 @@ class FreeEnergy:
         # [lambda, s]
         return np.array(trans_s).T
 
+    def minimum_m(self, s, lam, onlyF=True):
+        self.m = self.mlist.copy()
+        if onlyF:
+            return self.mlist[np.argmin(self.f(s, lam))]  # 得た解から f を最小にする m を選んでくる.
+        else:
+            for _ in range(10):
+                self.m = self.selfconsistent_m(s, lam)  # 逐次代入でself-consitent方程式を解く
+            return self.mlist[np.argmin(self.f(s, lam))]  # 得た解から f を最小にする m を選んでくる.
+
+
 
 
 

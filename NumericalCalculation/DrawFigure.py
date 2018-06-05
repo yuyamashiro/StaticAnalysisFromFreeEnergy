@@ -31,12 +31,17 @@ class DrawFigure:
         all_params['onlyF'] = self.onlyF
         self.label_list.append(label)
 
-    def draw_figure(self, file_name):
+    def draw_figure(self, file_name, show=False):
         plot_setting(font_size=10)
         plt.xlim(0,1)
         plt.ylim(0,1)
         for pd, label in zip(self.phasediagrams, self.label_list):
             plt.plot(pd[1], pd[0], '.', label=label)
         plt.legend()
-        plt.savefig(file_name)
+        if show:
+            plt.show()
+        else:
+            plt.savefig(file_name)
+
+
 
